@@ -12,8 +12,12 @@ class HomeController extends AbstractController
 {
     public function index(): Response
     {
+        $posts = $this->getDoctrine()
+            ->getRepository(Post::class)
+            ->findAll();
+
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            'posts' => $posts,
         ]);
     }
 

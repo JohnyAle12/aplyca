@@ -38,9 +38,19 @@
                     <th>{{ post.title }}</th>
                     <td>{{ post.publishdate|format_datetime('medium', 'short') }}</td>
                     <td>{{ post.author }}</td>
-                    <td><a href="" class="text-success">Ver contenido</a></td>
-                    <td><a href="" class="text-success">Editar</a></td>
-                    <td><a href="" class="text-danger">Eliminar</a></td>
+                    <td><a href="{{ path('post.show', {'post' : post.id}) }}" class="text-success">Ver contenido</a></td>
+                    <td><a href="{{ path('post.edit', {'post' : post.id}) }}" class="text-success">Editar</a></td>
+                    <td>
+                      <form method="POST" action="{{ path('post.delete', {'post': post.id}) }}" onsubmit="return confirm('Estas seguro de eliminar este Post?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}">
+                        <button class="text-danger btn btn-sm btn-link">Eliminar</button>
+                      </form>
+                    </td>
+                  </tr>
+                  {% else %}
+                  <tr>
+                      <td colspan="6" class="text-center">No existen registros</td>
                   </tr>
                   {% endfor %}
                 </tbody>

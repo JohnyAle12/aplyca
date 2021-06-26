@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} |  {% endblock %}
+
+{% block body %}
+<div class="container h-100">
+    <div class="row h-100 justify-content-center aligns-items-center">
+        <div class="col-12 mt-3">
+            <h3 class="text-center">{{ post.title }}</h3>
+        </div>
+        <div class="col-6 bg-white rounded">
+            {% if post.image %}
+            <div class="rounded p-4">
+                <img src="{{ asset('uploads/post_images/' ~ post.image) }}" class="img-fluid">
+            </div>
+            {% endif %}
+            <h3>Contenido</h3>
+            <p class="text-justify">
+                {{ post.content }}
+            </p>
+            <small>Autor: {{ post.author }}</small><br>
+            <small>Fecha publicación: {{ post.publishdate|format_datetime('medium', 'short') }}</small>
+        </div>
+    </div>
+</div>
+{% endblock %}

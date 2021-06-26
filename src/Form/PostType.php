@@ -20,7 +20,7 @@ class PostType extends AbstractType
             ->add('title', TextType::class, ['label' => 'Título:'])
             ->add('publish_date', DateTimeType::class, ['label' => 'Fecha de publicación:'])
             ->add('author', TextType::class, ['label' => 'Autor:'])
-            ->add('image', FileType::class, ['label' => 'Imagen:'])
+            ->add('image', FileType::class, ['label' => 'Imagen:', 'data_class' => null, 'required' => false, 'attr' => ['accept' => 'image/*']])
             ->add('content', TextareaType::class, ['label' => 'Contenido:'])
             ->add('Guardar', SubmitType::class, ['attr' => ['class' => 'btn-success btn-block']])
         ;
