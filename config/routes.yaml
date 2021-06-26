@@ -1,3 +1,19 @@
 index:
   path: /
   controller: App\Controller\HomeController::index
+
+home:
+  path: /home
+  controller: App\Controller\HomeController::home
+
+login:
+  path: /login
+  controller: App\Controller\LoginController::login
+
+register:
+  path: /register
+  controller: App\Controller\RegisterController::index
+
+register.store:
+  path: /save-register
+  controller: App\Controller\RegisterController::store
