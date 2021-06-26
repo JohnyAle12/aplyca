@@ -1,16 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %} {{ parent() }} | Inicio {% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Bienvenidoooooo </h1>
-
-    
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <h3 class="mt-3">Estadísticas</h3>
+            <div class="card mt-3">
+                <div class="card-header">
+                  Hola {{ app.user.name }} {{ app.user.lastname }}
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Total posts: 500</h5>
+                  <p class="card-text">Creados hoy: 12</p>
+                  <a href="{{ path('post.create') }}" class="btn btn-primary btn-block">Crear Post</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <h3 class="mt-3">Listado de posts</h3>
+            <table class="table table-bordered mt-3">
+                <thead class="table-light">
+                    <tr>
+                      <th scope="col">Título</th>
+                      <th scope="col">Fecha publicación</th>
+                      <th scope="col">Autor</th>
+                      <th scope="col">Ver</th>
+                      <th scope="col">Editar</th>
+                      <th scope="col">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for post in posts %}
+                  <tr>
+                    <th>{{ post.title }}</th>
+                    <td>{{ post.publishdate|format_datetime('medium', 'short') }}</td>
+                    <td>{{ post.author }}</td>
+                    <td><a href="{{ path('post.show', {'post' : post.id}) }}" class="text-success">Ver contenido</a></td>
+                    <td><a href="{{ path('post.edit', {'post' : post.id}) }}" class="text-success">Editar</a></td>
+                    <td>
+                      <form method="POST" action="{{ path('post.delete', {'post': post.id}) }}" onsubmit="return confirm('Estas seguro de eliminar este Post?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}">
+                        <button class="text-danger btn btn-sm btn-link">Eliminar</button>
+                      </form>
+                    </td>
+                  </tr>
+                  {% else %}
+                  <tr>
+                      <td colspan="6" class="text-center">No existen registros</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 {% endblock %}

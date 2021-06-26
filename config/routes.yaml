@@ -1,19 +1,58 @@
 index:
   path: /
   controller: App\Controller\HomeController::index
+  methods: GET
 
 home:
   path: /home
   controller: App\Controller\HomeController::home
+  methods: GET
 
 login:
   path: /login
   controller: App\Controller\LoginController::login
+  methods: [GET, POST]
 
 register:
   path: /register
   controller: App\Controller\RegisterController::index
+  methods: GET
 
 register.store:
   path: /save-register
   controller: App\Controller\RegisterController::store
+  methods: POST
+
+post.show:
+  path: /publicacion/{post}
+  controller: App\Controller\PostController::show
+  methods: GET
+
+post.create:
+  path: /post/create
+  controller: App\Controller\PostController::create
+  methods: GET
+
+post.store:
+  path: /post
+  controller: App\Controller\PostController::store
+  methods: POST
+
+post.edit:
+  path: /post/{post}/edit
+  controller: App\Controller\PostController::edit
+  methods: GET
+
+post.update:
+  path: /post/{post}/update
+  controller: App\Controller\PostController::update
+  methods: POST
+
+post.delete:
+  path: /post/{post}/delete
+  controller: App\Controller\PostController::delete
+  methods: POST
+
+contact:
+  path: /contact
+  controller: App\Controller\ContactController::index

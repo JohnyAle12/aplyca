@@ -1,26 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %} {{ parent() }} | Bienvenido a Aplyca Blog {% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="container">
+    <h1 class="mt-3 text-center">Bienvenido a Aplyca Blog</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/johnyalejandroprieto/Desktop/Proyectos Software/Prueba Aplyca/Aplyca/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/johnyalejandroprieto/Desktop/Proyectos Software/Prueba Aplyca/Aplyca/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
+    <div class="row mt-3">
+        {% for post in posts %}
+            <div class="col-3">
+                <div class="card" style="width: 18rem;">
+                    {% if post.image %}
+                        <img src="{{ asset('uploads/post_images/' ~ post.image) }}" class="card-img-top" style="height: 170px;">
+                    {% endif %}
+                    <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text text-justify">{{ post.content|striptags|slice(0, 50) }} ...</p>
+                    <a href="{{ path('post.show', {'post' : post.id}) }}" class="btn btn-primary btn-block">Ver Post</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12 text-center">
+                <strong>No existen registros</strong>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

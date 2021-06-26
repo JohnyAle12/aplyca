@@ -51,8 +51,8 @@ class RegisterController extends AbstractController
         $em->persist($user);
         $em->flush();
 
-        $this->addFlash('success', 'Registro exitoso');
+        $this->addFlash('success', 'Usuario registrado con éxito');
 
-        return $this->redirectToRoute('index');
+        return $this->redirectToRoute('login');
     }
 }
