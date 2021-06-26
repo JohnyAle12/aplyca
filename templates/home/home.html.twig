@@ -7,15 +7,15 @@
 <div class="container">
     <div class="row">
         <div class="col-3">
-            <h3 class="mt-3">Hola {{ app.user.name }} {{ app.user.lastname }} </h3>
+            <h3 class="mt-3">Estadísticas</h3>
             <div class="card mt-3">
                 <div class="card-header">
-                  Estadísticas
+                  Hola {{ app.user.name }} {{ app.user.lastname }}
                 </div>
                 <div class="card-body">
                   <h5 class="card-title">Total posts: 500</h5>
-                  <p class="card-text">xxx</p>
-                  <a href="#" class="btn btn-primary">Crear post</a>
+                  <p class="card-text">Creados hoy: 12</p>
+                  <a href="{{ path('post.create') }}" class="btn btn-primary btn-block">Crear Post</a>
                 </div>
             </div>
         </div>
@@ -24,25 +24,25 @@
             <table class="table table-bordered mt-3">
                 <thead class="table-light">
                     <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">First</th>
-                      <th scope="col">Last</th>
-                      <th scope="col">Handle</th>
+                      <th scope="col">Título</th>
+                      <th scope="col">Fecha publicación</th>
+                      <th scope="col">Autor</th>
+                      <th scope="col">Ver</th>
+                      <th scope="col">Editar</th>
+                      <th scope="col">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                    </tr>
+                  {% for post in posts %}
+                  <tr>
+                    <th>{{ post.title }}</th>
+                    <td>{{ post.publishdate|format_datetime('medium', 'short') }}</td>
+                    <td>{{ post.author }}</td>
+                    <td><a href="" class="text-success">Ver contenido</a></td>
+                    <td><a href="" class="text-success">Editar</a></td>
+                    <td><a href="" class="text-danger">Eliminar</a></td>
+                  </tr>
+                  {% endfor %}
                 </tbody>
             </table>
         </div>

@@ -7,8 +7,6 @@
     <div class="row h-100 justify-content-center aligns-items-center">
         <div class="col-5 bg-white rounded my-3 p-5">
             <h3 class="text-center">Registrarse</h3>
-            
-
             {{ form_start(form) }}
                 {{ form_label(form.name, 'Nombres:') }}
                 {{ form_widget(form.name) }}
@@ -18,7 +16,6 @@
                 {{ form_widget(form.email) }}
                 {{ form_label(form.password, 'Contraseña:') }}
                 {{ form_widget(form.password) }}
-
 
                 <div class="d-grid gap-2 mt-3">
                     {{ form_widget(form.Registrar, {'attr': {'class': 'btn-success'}}) }}

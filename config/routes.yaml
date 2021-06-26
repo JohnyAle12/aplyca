@@ -17,3 +17,30 @@ register:
 register.store:
   path: /save-register
   controller: App\Controller\RegisterController::store
+
+post.create:
+  path: /post/create
+  controller: App\Controller\PostController::create
+
+post.store:
+  path: /post
+  controller: App\Controller\PostController::store
+  methods: POST
+
+post.edit:
+  path: /post/{id}/edit
+  controller: App\Controller\PostController::edit
+
+post.update:
+  path: /post
+  controller: App\Controller\PostController::update
+  methods: PUT
+
+post.delete:
+  path: /post/{id}
+  controller: App\Controller\PostController::delete
+  methods: DELETE
+
+contact:
+  path: /contact
+  controller: App\Controller\ContactController::index
