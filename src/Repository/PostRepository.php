@@ -29,6 +29,22 @@ class PostRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findTotalByUserCreated($user, $date = null)
+    {
+        $qb =  $this->createQueryBuilder('p')
+            ->select('count(p.id)')
+            ->where('p.user = :user')
+            ->setParameter('user', $user);
+        
+        if($date){
+            $qb->andWhere('p.created_at LIKE :date')
+            ->setParameter('date', '%'.$date.'%');
+        }
+
+        return $qb->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */

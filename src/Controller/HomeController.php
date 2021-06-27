@@ -28,8 +28,18 @@ class HomeController extends AbstractController
             ->getRepository(Post::class)
             ->findByUserCreated($user);
 
+        $total = $this->getDoctrine()
+            ->getRepository(Post::class)
+            ->findTotalByUserCreated($user);
+        
+        $totalToday = $this->getDoctrine()
+            ->getRepository(Post::class)
+            ->findTotalByUserCreated($user, date('Y-m-d'));
+
         return $this->render('home/home.html.twig', [
             'posts' => $posts,
+            'total' => $total[0][1],
+            'totalToday' => $totalToday[0][1]
         ]);
     }
 
