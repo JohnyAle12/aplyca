@@ -23,9 +23,10 @@ class HomeController extends AbstractController
 
     public function home(): Response
     {
+        $user = $this->getUser()->getId();
         $posts = $this->getDoctrine()
             ->getRepository(Post::class)
-            ->findAll();
+            ->findByUserCreated($user);
 
         return $this->render('home/home.html.twig', [
             'posts' => $posts,
