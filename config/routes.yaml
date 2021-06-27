@@ -54,5 +54,16 @@ post.delete:
   methods: POST
 
 contact:
-  path: /contact
+  path: /list-contact
   controller: App\Controller\ContactController::index
+  methods: GET
+
+contact.create:
+  path: /contact/create
+  controller: App\Controller\ContactController::create
+  methods: GET
+
+contact.store:
+  path: /contact
+  controller: App\Controller\ContactController::store
+  methods: POST

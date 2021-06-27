@@ -19,6 +19,32 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
+    public function findByUserCreated($user)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('p.created_at', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findTotalByUserCreated($user, $date = null)
+    {
+        $qb =  $this->createQueryBuilder('p')
+            ->select('count(p.id)')
+            ->where('p.user = :user')
+            ->setParameter('user', $user);
+        
+        if($date){
+            $qb->andWhere('p.created_at LIKE :date')
+            ->setParameter('date', '%'.$date.'%');
+        }
+
+        return $qb->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */

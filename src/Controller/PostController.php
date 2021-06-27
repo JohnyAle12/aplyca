@@ -77,9 +77,11 @@ class PostController extends AbstractController
         $post->setContent($request->request->get('post')['content']);
         $post->setUpdatedAt(new DateTime('now'));
 
+        $oldImage = $post->getImage();
         $newFilename = $this->storeFile($request->files);
         if($newFilename){
             $post->setImage($newFilename);
+            $this->deleteFile($oldImage);
         }
 
         $em->persist($post);
@@ -105,13 +107,12 @@ class PostController extends AbstractController
 
     public function delete(Post $post): Response
     {       
+        //TODO investigar softdeletes con doctrine
         $em = $this->getDoctrine()->getManager();
         $em->remove($post);
         $em->flush();
 
-        $filesystem = new Filesystem();
-        $path = $this->getParameter('post_images').'/'.$post->getImage();
-        $filesystem->remove($path);
+        $this->deleteFile($post->getImage());
 
         $this->addFlash('success', 'Post eliminado con éxito');
 
@@ -140,6 +141,16 @@ class PostController extends AbstractController
             return null;
         }catch(FileException $e) {
             throw new \Exception('Ah ocurrido un error en storeFile()');
+        }
+    }
+
+    private function deleteFile($file){
+        try{
+            $filesystem = new Filesystem();
+            $path = $this->getParameter('post_images').'/'.$file;
+            $filesystem->remove($path);
+        }catch(FileException $e) {
+            throw new \Exception('Ah ocurrido un error en deleteFile()');
         }
     }
 }

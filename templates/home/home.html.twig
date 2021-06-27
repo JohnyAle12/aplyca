@@ -13,11 +13,12 @@
                   Hola {{ app.user.name }} {{ app.user.lastname }}
                 </div>
                 <div class="card-body">
-                  <h5 class="card-title">Total posts: 500</h5>
-                  <p class="card-text">Creados hoy: 12</p>
+                  <h5 class="card-title">Total posts: {{ total }}</h5>
+                  <p class="card-text">Creados hoy: {{ totalToday }}</p>
                   <a href="{{ path('post.create') }}" class="btn btn-primary btn-block">Crear Post</a>
                 </div>
             </div>
+            <a href="{{ path('contact') }}" class="btn btn-secondary btn-block mt-5">Registros de contacto</a>
         </div>
         <div class="col-9">
             <h3 class="mt-3">Listado de posts</h3>
