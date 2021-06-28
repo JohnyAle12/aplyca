@@ -25,8 +25,7 @@ class PostRepository extends ServiceEntityRepository
             ->where('p.user = :user')
             ->setParameter('user', $user)
             ->orderBy('p.created_at', 'DESC')
-            ->getQuery()
-            ->getResult();
+            ->getQuery();
     }
 
     public function findTotalByUserCreated($user, $date = null)

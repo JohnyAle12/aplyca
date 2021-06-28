@@ -34,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                  {% for post in posts %}
+                  {% for post in pagination %}
                   <tr>
                     <th>{{ post.title }}</th>
                     <td>{{ post.publishdate|format_datetime('medium', 'short') }}</td>
@@ -56,6 +56,9 @@
                   {% endfor %}
                 </tbody>
             </table>
+            <div class="navigation">
+              {{ knp_pagination_render(pagination) }}
+            </div>
         </div>
     </div>
 </div>

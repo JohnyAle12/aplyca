@@ -25,6 +25,9 @@
                 <strong>No existen registros</strong>
             </div>
         {% endfor %}
+        <div class="navigation mt-5">
+            {{ knp_pagination_render(posts) }}
+        </div>
     </div>
 </div>
 {% endblock %}
